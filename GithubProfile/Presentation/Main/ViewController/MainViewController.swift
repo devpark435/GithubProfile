@@ -94,8 +94,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "Menu \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableCell", for: indexPath) as! MenuTableCell
+        cell.configure(with: (image: UIImage(named: "placeholder"), title: "menu\(indexPath.row)", symbolName: "chevron.right"))
         return cell
     }
 }
