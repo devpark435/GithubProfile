@@ -45,8 +45,19 @@ extension EventViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let events = events[indexPath.row]
-        
-        guard let url = URL(string: events.repo.url) else { return }
+        let originalString = events.repo.url
+        var desiredString = originalString.replacingOccurrences(of: "api.github.com/repos", with: "github.com")
+        switch events.type {
+        case "IssuesEvent":
+            desiredString = desiredString + "/issues"
+        case "PushEvent":
+            desiredString = desiredString + "/commits"
+        case "PullRequestEvent":
+            desiredString = desiredString + "/pulls"
+        default:
+            break
+        }
+        guard let url = URL(string: desiredString) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
