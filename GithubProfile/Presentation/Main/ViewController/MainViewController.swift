@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet weak var menuTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class MainViewController: UIViewController {
                 print("Error: \(error)")
             }
         }
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
     }
 
     func updateProfile(){
@@ -83,5 +86,17 @@ class MainViewController: UIViewController {
         buttonStackView.spacing = 8
     }
     
+}
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = "Menu \(indexPath.row)"
+        return cell
+    }
 }
 
