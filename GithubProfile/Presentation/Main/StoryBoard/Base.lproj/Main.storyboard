@@ -31,13 +31,13 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SjT-sc-fWG">
-                                <rect key="frame" x="30" y="199" width="324" height="100"/>
+                                <rect key="frame" x="30" y="204" width="324" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="fJN-Rh-XlZ"/>
+                                    <constraint firstAttribute="height" constant="80" id="fJN-Rh-XlZ"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="K0i-du-lZs">
-                                <rect key="frame" x="30" y="314" width="324" height="504"/>
+                                <rect key="frame" x="30" y="299" width="324" height="519"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -54,12 +54,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SjT-sc-fWG" secondAttribute="trailing" constant="39" id="RXj-VB-Ne0"/>
                             <constraint firstItem="EOh-bG-lFm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="VKj-JV-1dI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="K0i-du-lZs" secondAttribute="trailing" constant="39" id="Zss-zO-sYe"/>
-                            <constraint firstItem="SjT-sc-fWG" firstAttribute="top" secondItem="EOh-bG-lFm" secondAttribute="bottom" constant="10" id="pUY-RC-now"/>
+                            <constraint firstItem="SjT-sc-fWG" firstAttribute="top" secondItem="EOh-bG-lFm" secondAttribute="bottom" constant="15" id="pUY-RC-now"/>
                             <constraint firstItem="K0i-du-lZs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="tU1-cE-Qls"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonStackView" destination="SjT-sc-fWG" id="dOk-7x-5uT"/>
+                        <outlet property="menuTableView" destination="K0i-du-lZs" id="QUp-pD-uXO"/>
                         <outlet property="profileImageView" destination="EOh-bG-lFm" id="3Do-SA-sXX"/>
                         <outlet property="stackView" destination="vvk-7c-RO8" id="GhO-z8-oON"/>
                     </connections>
