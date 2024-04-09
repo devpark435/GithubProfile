@@ -114,8 +114,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 print("error")
             }
         case 1:
-            let storyboard = UIStoryboard(name: "Repo", bundle: nil)
-            if let pushVC = storyboard.instantiateViewController(withIdentifier: "Repo") as? RepoViewController {
+            let storyboard = UIStoryboard(name: "Event", bundle: nil)
+            if let pushVC = storyboard.instantiateViewController(withIdentifier: "Event") as? EventViewController {
                 self.navigationController?.pushViewController(pushVC, animated: true)
                 print("success")
             } else {
