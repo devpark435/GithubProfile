@@ -17,6 +17,8 @@ class GetUserData{
             switch response.result {
             case .success(let value):
                 print("Response: \(value)")
+                // Update User.shared with the value from the response
+                User.shared.update(with: value)
             case .failure(let error):
                 print("Error: \(error)")
             }
