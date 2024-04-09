@@ -10,18 +10,18 @@ import Alamofire
 
 class GetUserData{
     static let shared = GetUserData()
-    func getUserData(){
-        let url = "https://api.github.com/users/devpark435"
-
-        AF.request(url).responseDecodable(of: User.self) { response in
-            switch response.result {
-            case .success(let value):
-                print("Response: \(value)")
-                // Update User.shared with the value from the response
-                User.shared.update(with: value)
-            case .failure(let error):
-                print("Error: \(error)")
+    func getUserData(completion: @escaping (Result<User, Error>) -> Void) {
+            let url = "https://api.github.com/users/devpark435"
+            
+            AF.request(url).responseDecodable(of: User.self) { response in
+                switch response.result {
+                case .success(let user):
+                    User.shared.update(with: user)
+                    completion(.success(user))
+                case .failure(let error):
+                    print("Error: \(error)")
+                    completion(.failure(error))
+                }
             }
         }
-    }
 }
