@@ -6,3 +6,20 @@
 //
 
 import Foundation
+import Alamofire
+
+class GetUserData{
+    static let shared = GetUserData()
+    func getUserData(){
+        let url = "https://api.github.com/users/devpark435"
+
+        AF.request(url).responseDecodable(of: User.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("Response: \(value)")
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+}
