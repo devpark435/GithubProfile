@@ -6,39 +6,42 @@
 //
 
 import Foundation
-struct User: Codable {
-    let login: String
-    let id: Int
-    let nodeID: String
-    let avatarURL: String
-    let gravatarID: String
-    let url: String
-    let htmlURL: String
-    let followersURL: String
-    let followingURL: String
-    let gistsURL: String
-    let starredURL: String
-    let subscriptionsURL: String
-    let organizationsURL: String
-    let reposURL: String
-    let eventsURL: String
-    let receivedEventsURL: String
-    let type: String
-    let siteAdmin: Bool
-    let name: String?
-    let company: String?
-    let blog: String
-    let location: String?
-    let email: String?
-    let hireable: Bool?
-    let bio: String?
-    let twitterUsername: String?
-    let publicRepos: Int
-    let publicGists: Int
-    let followers: Int
-    let following: Int
-    let createdAt: String
-    let updatedAt: String
+
+class User: Codable {
+    static let shared = User()
+    
+    var login: String = ""
+    var id: Int = 0
+    var nodeID: String = ""
+    var avatarURL: String = ""
+    var gravatarID: String = ""
+    var url: String = ""
+    var htmlURL: String = ""
+    var followersURL: String = ""
+    var followingURL: String = ""
+    var gistsURL: String = ""
+    var starredURL: String = ""
+    var subscriptionsURL: String = ""
+    var organizationsURL: String = ""
+    var reposURL: String = ""
+    var eventsURL: String = ""
+    var receivedEventsURL: String = ""
+    var type: String = ""
+    var siteAdmin: Bool = false
+    var name: String?
+    var company: String?
+    var blog: String = ""
+    var location: String?
+    var email: String?
+    var hireable: Bool?
+    var bio: String?
+    var twitterUsername: String?
+    var publicRepos: Int = 0
+    var publicGists: Int = 0
+    var followers: Int = 0
+    var following: Int = 0
+    var createdAt: String = ""
+    var updatedAt: String = ""
     
     enum CodingKeys: String, CodingKey {
         case login, id
@@ -65,5 +68,40 @@ struct User: Codable {
         case followers, following
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+    }
+    
+    func update(with user: User) {
+        login = user.login
+        id = user.id
+        nodeID = user.nodeID
+        avatarURL = user.avatarURL
+        gravatarID = user.gravatarID
+        url = user.url
+        htmlURL = user.htmlURL
+        followersURL = user.followersURL
+        followingURL = user.followingURL
+        gistsURL = user.gistsURL
+        starredURL = user.starredURL
+        subscriptionsURL = user.subscriptionsURL
+        organizationsURL = user.organizationsURL
+        reposURL = user.reposURL
+        eventsURL = user.eventsURL
+        receivedEventsURL = user.receivedEventsURL
+        type = user.type
+        siteAdmin = user.siteAdmin
+        name = user.name
+        company = user.company
+        blog = user.blog
+        location = user.location
+        email = user.email
+        hireable = user.hireable
+        bio = user.bio
+        twitterUsername = user.twitterUsername
+        publicRepos = user.publicRepos
+        publicGists = user.publicGists
+        followers = user.followers
+        following = user.following
+        createdAt = user.createdAt
+        updatedAt = user.updatedAt
     }
 }
