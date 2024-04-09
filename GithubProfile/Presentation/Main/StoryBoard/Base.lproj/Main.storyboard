@@ -16,13 +16,39 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EOh-bG-lFm">
+                                <rect key="frame" x="30" y="89" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="8jg-84-Tm4"/>
+                                    <constraint firstAttribute="width" constant="100" id="GYC-7S-1pB"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vvk-7c-RO8">
+                                <rect key="frame" x="150" y="89" width="228" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="J87-kB-71d"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vvk-7c-RO8" secondAttribute="trailing" constant="15" id="1Xf-Tb-6mF"/>
+                            <constraint firstItem="EOh-bG-lFm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="2iX-gI-Swy"/>
+                            <constraint firstItem="vvk-7c-RO8" firstAttribute="leading" secondItem="EOh-bG-lFm" secondAttribute="trailing" constant="20" id="7xj-0c-UVl"/>
+                            <constraint firstItem="vvk-7c-RO8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="P8q-6s-D3o"/>
+                            <constraint firstItem="EOh-bG-lFm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="VKj-JV-1dI"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="profileImageView" destination="EOh-bG-lFm" id="3Do-SA-sXX"/>
+                        <outlet property="stackView" destination="vvk-7c-RO8" id="GhO-z8-oON"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-146" y="5"/>
+            <point key="canvasLocation" x="-147.32824427480915" y="4.9295774647887329"/>
         </scene>
     </scenes>
     <resources>
