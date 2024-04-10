@@ -12,14 +12,29 @@ class RepoViewController: UIViewController {
     
     @IBOutlet weak var repoTableView: UITableView!
     var repositories: [Repository] = []
+    var isLoading = false
+    
+    let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         repoTableView.delegate = self
         repoTableView.dataSource = self
+        
+        fetchRepositories()
+        
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        repoTableView.refreshControl = refreshControl
+        
+    }
+    
+    @objc func refreshData() {
+        repositories.removeAll()
         fetchRepositories()
     }
+    
     func fetchRepositories() {
+        isLoading = true
         GetRepoData.shared.getRepoData { [weak self] result in
             guard let self = self else { return }
             
@@ -29,6 +44,8 @@ class RepoViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.repoTableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                    self.isLoading = false
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
