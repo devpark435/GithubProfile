@@ -13,7 +13,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="Main" id="BYZ-38-t0r" customClass="MainViewController" customModule="GithubProfile" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="UIScrollView">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -31,20 +31,23 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SjT-sc-fWG">
-                                <rect key="frame" x="30" y="298" width="324" height="50"/>
+                                <rect key="frame" x="30" y="298" width="333" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="fJN-Rh-XlZ"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="K0i-du-lZs">
-                                <rect key="frame" x="30" y="363" width="324" height="455"/>
+                                <rect key="frame" x="30" y="363" width="333" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="zS2-SK-GtP"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuTableCell" id="7nN-bB-Y3d" customClass="MenuTableCell" customModule="GithubProfile" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="324" height="44.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="333" height="44.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7nN-bB-Y3d" id="hDT-E8-Prc">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="44.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="333" height="44.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -59,11 +62,10 @@
                             <constraint firstItem="EOh-bG-lFm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="2iX-gI-Swy"/>
                             <constraint firstItem="SjT-sc-fWG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="4l4-6p-Gw0"/>
                             <constraint firstItem="vvk-7c-RO8" firstAttribute="leading" secondItem="EOh-bG-lFm" secondAttribute="trailing" constant="20" id="7xj-0c-UVl"/>
-                            <constraint firstItem="K0i-du-lZs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ABz-db-4j8"/>
                             <constraint firstItem="vvk-7c-RO8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="P8q-6s-D3o"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SjT-sc-fWG" secondAttribute="trailing" constant="39" id="RXj-VB-Ne0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SjT-sc-fWG" secondAttribute="trailing" constant="30" id="RXj-VB-Ne0"/>
                             <constraint firstItem="EOh-bG-lFm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="VKj-JV-1dI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="K0i-du-lZs" secondAttribute="trailing" constant="39" id="Zss-zO-sYe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="K0i-du-lZs" secondAttribute="trailing" constant="30" id="Zss-zO-sYe"/>
                             <constraint firstItem="SjT-sc-fWG" firstAttribute="top" secondItem="EOh-bG-lFm" secondAttribute="bottom" constant="15" id="pUY-RC-now"/>
                             <constraint firstItem="K0i-du-lZs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="tU1-cE-Qls"/>
                         </constraints>
