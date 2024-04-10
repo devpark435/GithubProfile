@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet weak var menuTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class MainViewController: UIViewController {
                 print("Error: \(error)")
             }
         }
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
     }
 
     func updateProfile(){
@@ -39,19 +42,19 @@ class MainViewController: UIViewController {
         
         let nameLabel = UILabel().then {
             $0.text = "\(User.shared.name ?? "")"
-            $0.font = UIFont.systemFont(ofSize: 17)
+            $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             $0.textColor = .black
         }
         
         let emailLabel = UILabel().then {
             $0.text = "\(User.shared.login)"
-            $0.font = UIFont.systemFont(ofSize: 13)
+            $0.font = UIFont.systemFont(ofSize: 17)
             $0.textColor = .black
         }
         
         let locationLabel = UILabel().then {
             $0.text = "\(User.shared.createdAt)"
-            $0.font = UIFont.systemFont(ofSize: 13)
+            $0.font = UIFont.systemFont(ofSize: 17)
             $0.textColor = .black
         }
         
@@ -83,5 +86,52 @@ class MainViewController: UIViewController {
         buttonStackView.spacing = 8
     }
     
+}
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableCell", for: indexPath) as! MenuTableCell
+        let menuName = ["Repo", "Event", "Organization"]
+        cell.configure(with: (image: UIImage(named: "placeholder"), title: menuName[indexPath.row], symbolName: "chevron.right"))
+        return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80 // 원하는 높이 값으로 변경
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let storyboard = UIStoryboard(name: "Repo", bundle: nil)
+            if let pushVC = storyboard.instantiateViewController(withIdentifier: "Repo") as? RepoViewController {
+                self.navigationController?.pushViewController(pushVC, animated: true)
+                print("success")
+            } else {
+                print("error")
+            }
+        case 1:
+            let storyboard = UIStoryboard(name: "Event", bundle: nil)
+            if let pushVC = storyboard.instantiateViewController(withIdentifier: "Event") as? EventViewController {
+                self.navigationController?.pushViewController(pushVC, animated: true)
+                print("success")
+            } else {
+                print("error")
+            }
+        case 2:
+            let storyboard = UIStoryboard(name: "Organization", bundle: nil)
+            if let pushVC = storyboard.instantiateViewController(withIdentifier: "Organization") as? OrganizationViewController {
+                self.navigationController?.pushViewController(pushVC, animated: true)
+                print("success")
+            } else {
+                print("error")
+            }
+        default:
+            return
+        }
+    }
 }
 
