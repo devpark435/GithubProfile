@@ -12,9 +12,6 @@ import Kingfisher
 class EventTableCell: UITableViewCell{
     let actorAvatarImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 5
-        $0.backgroundColor = .gray
     }
     
     let actorNameLabel = UILabel().then {
