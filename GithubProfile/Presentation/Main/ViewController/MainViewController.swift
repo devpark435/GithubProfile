@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
         }
         
         let locationLabel = UILabel().then {
-            $0.text = "\(User.shared.createdAt)"
+            $0.text = User.shared.createdAt.convertToCustomFormat()
             $0.font = UIFont.systemFont(ofSize: 17)
             $0.textColor = .black
         }

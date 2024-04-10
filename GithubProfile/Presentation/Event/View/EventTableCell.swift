@@ -89,6 +89,6 @@ class EventTableCell: UITableViewCell{
         }
         actorNameLabel.text = event.type
         repoNameLabel.text = event.repo.name
-        eventTimeLabel.text = event.createdAt
+        eventTimeLabel.text = event.createdAt.convertToCustomFormat()
     }
 }
