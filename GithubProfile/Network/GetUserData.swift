@@ -23,4 +23,18 @@ class GetUserData{
             }
         }
     }
+    
+    func getUserMd(completion: @escaping (Result<ReadmeResponse, Error>) -> Void) {
+        let url = "https://api.github.com/repos/devpark435/devpark435/readme"
+        
+        AF.request(url).responseDecodable(of: ReadmeResponse.self) { response in
+            switch response.result {
+            case .success(let readmeResponse):
+                completion(.success(readmeResponse))
+            case .failure(let error):
+                print("Error: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
 }
