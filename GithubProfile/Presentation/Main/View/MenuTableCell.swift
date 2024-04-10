@@ -10,10 +10,10 @@ import Then
 
 class MenuTableCell: UITableViewCell {
     let customImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .center
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 5
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .lightGray
     }
     
     let customLabel = UILabel().then {
