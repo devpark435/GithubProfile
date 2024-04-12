@@ -19,11 +19,13 @@ struct EventModel: Codable {
         case createdAt = "created_at"
     }
 }
+
 struct Repo: Codable {
     let id: Int
     let name: String
     let url: String
 }
+
 struct Actor: Codable {
     let id: Int
     let login: String

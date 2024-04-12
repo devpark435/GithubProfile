@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct Repository: Codable {
     let id: Int
     let name: String
@@ -14,7 +15,6 @@ struct Repository: Codable {
     let description: String?
     let language: String?
     let htmlURL: String
-    // 필요한 다른 프로퍼티 추가
     
     enum CodingKeys: String, CodingKey {
         case id, name
