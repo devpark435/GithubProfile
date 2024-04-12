@@ -8,7 +8,7 @@
 import UIKit
 import Then
 import Kingfisher
-
+import MarkdownView
 
 class MainViewController: UIViewController {
     
@@ -16,6 +16,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var menuTableView: UITableView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    let mdView = MarkdownView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,8 @@ class MainViewController: UIViewController {
         // 우측 바버튼 아이템 추가
         let markdownButton = UIBarButtonItem(image: UIImage(systemName: "doc.richtext"), style: .plain, target: self, action: #selector(showMarkdownView))
         navigationItem.rightBarButtonItem = markdownButton
+        
+        updateMarkdownView()
     }
     
     @objc func showMarkdownView() {
@@ -94,6 +98,73 @@ class MainViewController: UIViewController {
         buttonStackView.addArrangedSubview(followerButton)
         buttonStackView.addArrangedSubview(followingButton)
         buttonStackView.spacing = 8
+    }
+    
+    func updateMarkdownView(){
+        loadData()
+        scrollView.addSubview(mdView)
+        
+        mdView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            mdView.topAnchor.constraint(equalTo: menuTableView.bottomAnchor),
+            mdView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            mdView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            mdView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            mdView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        mdView.isScrollEnabled = false
+    }
+    func loadData() {
+        GetUserData.shared.getUserMd { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let readmeResponse):
+                getReadMe( urlString: readmeResponse.downloadUrl )
+//                let markdownText = self.decodeBase64(readmeResponse.content)
+//
+//                DispatchQueue.main.async {
+//                    self.mdView.load(markdown: markdownText)
+//                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    func getReadMe( urlString: String ){
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let data = data, error == nil else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            if let markdownString = String(data: data, encoding: .utf8) {
+                DispatchQueue.main.async {
+                    self?.mdView.load(markdown: markdownString)
+                }
+            }
+        }
+        task.resume()
+    }
+    // Base64 디코딩 함수
+    func decodeBase64(_ base64String: String) -> String {
+        let base64Encoded = base64String
+
+        var decodedString = ""
+        if let decodedData = Data(base64Encoded: base64Encoded) {
+            decodedString = String(data: decodedData, encoding: .utf8)!
+        }
+
+        if !decodedString.isEmpty {
+            print(decodedString)
+        } else {
+            print("Oops, invalid input format!")
+        }
+        return decodedString
     }
     
 }
