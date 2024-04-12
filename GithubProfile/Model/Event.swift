@@ -5,8 +5,6 @@
 //  Created by 박현렬 on 4/10/24.
 //
 
-import Foundation
-
 struct EventModel: Codable {
     let id: String
     let type: String
