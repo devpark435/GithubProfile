@@ -9,6 +9,8 @@ import Alamofire
 
 class GetUserData{
     static let shared = GetUserData()
+    
+    // MARK: - Get User Data
     func getUserData(completion: @escaping (Result<User, Error>) -> Void) {
         let url = "https://api.github.com/users/devpark435"
         
@@ -24,6 +26,7 @@ class GetUserData{
         }
     }
     
+    // MARK: - Get Readme.md
     func getUserMd(completion: @escaping (Result<ReadmeResponse, Error>) -> Void) {
         let url = "https://api.github.com/repos/devpark435/devpark435/readme"
         

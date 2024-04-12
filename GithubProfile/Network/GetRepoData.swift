@@ -9,6 +9,8 @@ import Alamofire
 
 class GetRepoData{
     static let shared = GetRepoData()
+    
+    // MARK: - Get Repository Data
     func getRepoData(completion: @escaping (Result<[Repository], Error>) -> Void) {
         let url = "https://api.github.com/users/devpark435/repos"
         
