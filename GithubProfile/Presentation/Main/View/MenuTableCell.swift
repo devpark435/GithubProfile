@@ -9,6 +9,7 @@ import UIKit
 import Then
 
 class MenuTableCell: UITableViewCell {
+    // MARK: - Properties
     let customImageView = UIImageView().then {
         $0.contentMode = .center
         $0.clipsToBounds = true
@@ -26,11 +27,13 @@ class MenuTableCell: UITableViewCell {
         $0.tintColor = .gray
     }
     
+    // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViews()
     }
     
+    // MARK: - setupViews & Constraints
     private func setupViews() {
         contentView.addSubview(customImageView)
         contentView.addSubview(customLabel)
@@ -60,6 +63,7 @@ class MenuTableCell: UITableViewCell {
         ])
     }
     
+    // MARK: - Configure
     func configure(with data: (image: UIImage?, title: String, symbolName: String)) {
         customImageView.image = data.image
         customLabel.text = data.title

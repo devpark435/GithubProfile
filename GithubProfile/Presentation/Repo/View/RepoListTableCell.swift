@@ -9,6 +9,7 @@ import UIKit
 import Then
 
 class RepoListTableCell: UITableViewCell{
+    // MARK: - Properties
     let repoNameLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         $0.textColor = .black
@@ -18,16 +19,19 @@ class RepoListTableCell: UITableViewCell{
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textColor = .gray
     }
+    
     let languageLabel = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textColor = .gray
     }
     
+    // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViews()
     }
     
+    // MARK: - setupViews & Constraints
     private func setupViews() {
         contentView.addSubview(repoNameLabel)
         contentView.addSubview(repoDescriptionLabel)
@@ -54,6 +58,7 @@ class RepoListTableCell: UITableViewCell{
         ])
     }
     
+    // MARK: - Configure Cell
     func configureCell(repository: Repository) {
         repoNameLabel.text = repository.name
         repoDescriptionLabel.text = repository.description ?? " "

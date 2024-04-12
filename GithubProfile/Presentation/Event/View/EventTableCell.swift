@@ -10,6 +10,7 @@ import Then
 import Kingfisher
 
 class EventTableCell: UITableViewCell{
+    // MARK: - Properties
     let actorAvatarImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
@@ -29,11 +30,13 @@ class EventTableCell: UITableViewCell{
         $0.textColor = .gray
     }
     
+    // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViews()
     }
     
+    // MARK: - setupViews & Constraints
     private func setupViews() {
         contentView.addSubview(actorAvatarImageView)
         contentView.addSubview(actorNameLabel)
@@ -67,6 +70,7 @@ class EventTableCell: UITableViewCell{
         ])
     }
     
+    // MARK: - Configure Cell
     func configureCell(event: EventModel) {
         switch event.type {
         case "CreateEvent":
