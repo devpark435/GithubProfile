@@ -100,6 +100,7 @@
                     <navigationItem key="navigationItem" id="27T-CX-r55"/>
                     <connections>
                         <outlet property="buttonStackView" destination="SjT-sc-fWG" id="dOk-7x-5uT"/>
+                        <outlet property="contentView" destination="r1M-IH-uVH" id="vSQ-wV-eIz"/>
                         <outlet property="menuTableView" destination="K0i-du-lZs" id="QUp-pD-uXO"/>
                         <outlet property="profileImageView" destination="EOh-bG-lFm" id="3Do-SA-sXX"/>
                         <outlet property="scrollView" destination="rdA-3O-2xQ" id="nVa-w1-DUh"/>

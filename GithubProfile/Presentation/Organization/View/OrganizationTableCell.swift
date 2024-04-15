@@ -68,6 +68,4 @@ class OrganizationTableCell: UITableViewCell {
             orgAvatarImageView.kf.setImage(with: avatarURL)
         }
     }
-    
-    
 }
