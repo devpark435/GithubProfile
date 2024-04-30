@@ -41,21 +41,21 @@ class RepoListTableCell: UITableViewCell{
     }
     
     private func setupConstraints() {
-        repoNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        repoDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        languageLabel.translatesAutoresizingMaskIntoConstraints = false
+        repoNameLabel.snp.makeConstraints{
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.top.equalTo(contentView.snp.top).offset(8)
+        }
         
-        NSLayoutConstraint.activate([
-            repoNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            repoNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            
-            repoDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            repoDescriptionLabel.topAnchor.constraint(equalTo: repoNameLabel.bottomAnchor, constant: 8),
-            
-            languageLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            languageLabel.topAnchor.constraint(equalTo: repoDescriptionLabel.bottomAnchor, constant: 8),
-            languageLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-        ])
+        repoDescriptionLabel.snp.makeConstraints{
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.top.equalTo(repoNameLabel.snp.bottom).offset(8)
+        }
+        
+        languageLabel.snp.makeConstraints{
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.top.equalTo(repoDescriptionLabel.snp.bottom).offset(8)
+            $0.bottom.equalTo(contentView.snp.bottom).offset(-8)
+        }
     }
     
     // MARK: - Configure Cell

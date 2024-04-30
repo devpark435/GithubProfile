@@ -7,6 +7,7 @@
 
 import UIKit
 import Then
+import SnapKit
 
 class MenuTableCell: UITableViewCell {
     // MARK: - Properties
@@ -43,24 +44,24 @@ class MenuTableCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        customImageView.translatesAutoresizingMaskIntoConstraints = false
-        customLabel.translatesAutoresizingMaskIntoConstraints = false
-        customSymbolImageView.translatesAutoresizingMaskIntoConstraints = false
+        customImageView.snp.makeConstraints{
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.centerY.equalTo(contentView.snp.centerY)
+            $0.width.equalTo(40)
+            $0.height.equalTo(40)
+        }
         
-        NSLayoutConstraint.activate([
-            customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            customImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            customImageView.widthAnchor.constraint(equalToConstant: 40),
-            customImageView.heightAnchor.constraint(equalToConstant: 40),
-            
-            customLabel.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 16),
-            customLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-            customSymbolImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            customSymbolImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            customSymbolImageView.widthAnchor.constraint(equalToConstant: 24),
-            customSymbolImageView.heightAnchor.constraint(equalToConstant: 24)
-        ])
+        customLabel.snp.makeConstraints{
+            $0.leading.equalTo(customImageView.snp.trailing).offset(16)
+            $0.centerY.equalTo(contentView.snp.centerY)
+        }
+        
+        customSymbolImageView.snp.makeConstraints{
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            $0.centerY.equalTo(contentView.snp.centerY)
+            $0.width.equalTo(24)
+            $0.height.equalTo(24)
+        }
     }
     
     // MARK: - Configure

@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import Kingfisher
+import SnapKit
 
 class OrganizationTableCell: UITableViewCell {
     // MARK: - Properties
@@ -45,19 +46,23 @@ class OrganizationTableCell: UITableViewCell {
     }
     
     func setupConstraints(){
-        NSLayoutConstraint.activate([
-            orgAvatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            orgAvatarImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            orgAvatarImageView.widthAnchor.constraint(equalToConstant: 80),
-            orgAvatarImageView.heightAnchor.constraint(equalToConstant: 80),
-            
-            orgNameLabel.leadingAnchor.constraint(equalTo: orgAvatarImageView.trailingAnchor, constant: 16),
-            orgNameLabel.topAnchor.constraint(equalTo: orgAvatarImageView.topAnchor, constant: 8),
-            
-            orgDescriptionLabel.topAnchor.constraint(equalTo: orgNameLabel.bottomAnchor, constant: 8),
-            orgDescriptionLabel.leadingAnchor.constraint(equalTo: orgAvatarImageView.trailingAnchor, constant: 16),
-            orgDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-        ])
+        orgAvatarImageView.snp.makeConstraints{
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.centerY.equalTo(contentView.snp.centerY)
+            $0.width.equalTo(80)
+            $0.height.equalTo(80)
+        }
+        
+        orgNameLabel.snp.makeConstraints{
+            $0.leading.equalTo(orgAvatarImageView.snp.trailing).offset(16)
+            $0.top.equalTo(orgAvatarImageView.snp.top).offset(8)
+        }
+        
+        orgDescriptionLabel.snp.makeConstraints{
+            $0.top.equalTo(orgNameLabel.snp.bottom).offset(8)
+            $0.leading.equalTo(orgAvatarImageView.snp.trailing).offset(16)
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-16)
+        }
     }
     
     // MARK: - Configure Cell

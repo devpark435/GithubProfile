@@ -9,6 +9,7 @@ import UIKit
 import Then
 import Kingfisher
 import MarkdownView
+import SnapKit
 
 class MainViewController: UIViewController {
     
@@ -95,14 +96,13 @@ class MainViewController: UIViewController {
         loadData()
         scrollView.addSubview(mdView)
         
-        mdView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            mdView.topAnchor.constraint(equalTo: menuTableView.bottomAnchor),
-            mdView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            mdView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            mdView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            mdView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
+        mdView.snp.makeConstraints{
+            $0.top.equalTo(menuTableView.snp.bottom)
+            $0.leading.equalTo(scrollView.snp.leading)
+            $0.trailing.equalTo(scrollView.snp.trailing)
+            $0.bottom.equalTo(scrollView.snp.bottom)
+        }
+
         mdView.isScrollEnabled = true
     }
     

@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import Kingfisher
+import SnapKit
 
 class EventTableCell: UITableViewCell{
     // MARK: - Properties
@@ -47,27 +48,28 @@ class EventTableCell: UITableViewCell{
     }
     
     private func setupConstraints() {
-        actorAvatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        actorNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        repoNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        eventTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        actorAvatarImageView.snp.makeConstraints{
+            $0.leading.equalTo(contentView.snp.leading).offset(16)
+            $0.top.equalTo(contentView.snp.top).offset(8)
+            $0.width.equalTo(40)
+            $0.height.equalTo(40)
+        }
         
-        NSLayoutConstraint.activate([
-            actorAvatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            actorAvatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            actorAvatarImageView.widthAnchor.constraint(equalToConstant: 40),
-            actorAvatarImageView.heightAnchor.constraint(equalToConstant: 40),
-            
-            actorNameLabel.leadingAnchor.constraint(equalTo: actorAvatarImageView.trailingAnchor, constant: 8),
-            actorNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            
-            repoNameLabel.leadingAnchor.constraint(equalTo: actorAvatarImageView.trailingAnchor, constant: 8),
-            repoNameLabel.topAnchor.constraint(equalTo: actorNameLabel.bottomAnchor, constant: 8),
-            
-            eventTimeLabel.leadingAnchor.constraint(equalTo: actorAvatarImageView.trailingAnchor, constant: 8),
-            eventTimeLabel.topAnchor.constraint(equalTo: repoNameLabel.bottomAnchor, constant: 8),
-            eventTimeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-        ])
+        actorNameLabel.snp.makeConstraints{
+            $0.leading.equalTo(actorAvatarImageView.snp.trailing).offset(8)
+            $0.top.equalTo(contentView.snp.top).offset(8)
+        }
+        
+        repoNameLabel.snp.makeConstraints{
+            $0.leading.equalTo(actorAvatarImageView.snp.trailing).offset(8)
+            $0.top.equalTo(actorNameLabel.snp.bottom).offset(8)
+        }
+        
+        eventTimeLabel.snp.makeConstraints{
+            $0.leading.equalTo(actorAvatarImageView.snp.trailing).offset(8)
+            $0.top.equalTo(repoNameLabel.snp.bottom).offset(8)
+            $0.bottom.equalTo(contentView.snp.bottom).offset(-8)
+        }
     }
     
     // MARK: - Configure Cell
