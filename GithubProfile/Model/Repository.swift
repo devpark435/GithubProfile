@@ -5,7 +5,7 @@
 //  Created by 박현렬 on 4/10/24.
 //
 
-struct Repository: Codable {
+struct Repository: Decodable {
     let id: Int
     let name: String
     let fullName: String
@@ -24,7 +24,7 @@ struct Repository: Codable {
     }
 }
 
-struct Owner: Codable {
+struct Owner: Decodable {
     let login: String
     let avatarURL: String
     

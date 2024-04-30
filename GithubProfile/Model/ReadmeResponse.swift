@@ -5,7 +5,7 @@
 //  Created by 박현렬 on 4/10/24.
 //
 
-struct ReadmeResponse: Codable {
+struct ReadmeResponse: Decodable {
     let content: String
     let downloadUrl: String
     

@@ -5,7 +5,7 @@
 //  Created by 박현렬 on 4/10/24.
 //
 
-struct EventModel: Codable {
+struct EventModel: Decodable {
     let id: String
     let type: String
     let actor: Actor
@@ -18,13 +18,13 @@ struct EventModel: Codable {
     }
 }
 
-struct Repo: Codable {
+struct Repo: Decodable {
     let id: Int
     let name: String
     let url: String
 }
 
-struct Actor: Codable {
+struct Actor: Decodable {
     let id: Int
     let login: String
     let displayLogin: String
