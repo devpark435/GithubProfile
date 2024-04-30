@@ -20,7 +20,7 @@ class GetUserData{
                 User.shared.update(with: user)
                 completion(.success(user))
             case .failure(let error):
-                print("Error: \(error)")
+                print("Get User Data Error: \(error)")
                 completion(.failure(error))
             }
         }
@@ -35,7 +35,7 @@ class GetUserData{
             case .success(let readmeResponse):
                 completion(.success(readmeResponse))
             case .failure(let error):
-                print("Error: \(error)")
+                print("Get User READ.md Error: \(error)")
                 completion(.failure(error))
             }
         }
