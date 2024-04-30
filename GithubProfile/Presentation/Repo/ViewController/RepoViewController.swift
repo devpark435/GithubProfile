@@ -101,7 +101,9 @@ extension RepoViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as! RepoListTableCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as? RepoListTableCell else {
+            return UITableViewCell()
+        }
         
         let repository = displayedRepositories[indexPath.row]
         cell.configureCell(repository: repository)

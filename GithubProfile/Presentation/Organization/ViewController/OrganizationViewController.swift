@@ -43,7 +43,10 @@ extension OrganizationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OrganizationTableCell", for: indexPath) as! OrganizationTableCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "OrganizationTableCell", for: indexPath) as? OrganizationTableCell else {
+            return UITableViewCell()
+        }
+        
         
         let org = orgs[indexPath.row]
         cell.configure(org: org)

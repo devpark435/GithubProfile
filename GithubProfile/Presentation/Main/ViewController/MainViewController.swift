@@ -145,7 +145,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableCell", for: indexPath) as! MenuTableCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableCell", for: indexPath) as? MenuTableCell else {
+            return UITableViewCell()
+        }
+        
         let iconImage = ["repo", "file-code", "organization"]
         let menuName = ["Repo", "Event", "Organization"]
         cell.configure(with: (image: UIImage(named: iconImage[indexPath.row]), title: menuName[indexPath.row], symbolName: "chevron.right"))
