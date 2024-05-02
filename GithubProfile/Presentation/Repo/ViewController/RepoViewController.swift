@@ -14,9 +14,17 @@ class RepoViewController: UIViewController {
     var repositories: [Repository] = []
     var displayedRepositories: [Repository] = []
     var isLoading = false
+    var isLoadingLast = false
     var activityIndicator: UIActivityIndicatorView!
     
     let refreshControl = UIRefreshControl()
+    
+    let searchController = UISearchController(searchResultsController: nil).then{
+        $0.searchBar.placeholder = "Search repositories"
+    }
+    
+    var page = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -31,13 +39,17 @@ class RepoViewController: UIViewController {
         setActivityIndicator()
         view.addSubview(activityIndicator)
         
-        loadInitialData()
+        // Set up search controller
+        searchController.searchResultsUpdater = self
+        self.navigationItem.searchController = searchController
+        definesPresentationContext = true
         
+        fetchRepositories()
     }
     
     @objc func refreshData() {
-        displayedRepositories.removeAll()
-        loadInitialData()
+        repositories.removeAll()
+        fetchRepositories()
     }
     
     func setActivityIndicator(){
@@ -47,82 +59,112 @@ class RepoViewController: UIViewController {
         activityIndicator.hidesWhenStopped = true
     }
     
-    func loadInitialData() {
-        fetchRepositories { [weak self] repositories in
-            guard let self = self else { return }
-            let initialRepositories = Array(repositories.prefix(8))
-            self.displayedRepositories.append(contentsOf: initialRepositories)
-            DispatchQueue.main.async {
-                self.repoTableView.reloadData()
-                self.refreshControl.endRefreshing()
-            }
-        }
-    }
-    
     func loadMoreData() {
-        guard !isLoading, displayedRepositories.count < repositories.count else {
+        guard !isLoading else {
             return
         }
-        
-        isLoading = true
-        activityIndicator.startAnimating()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let currentCount = self.displayedRepositories.count
-            let nextCount = min(currentCount + 8, self.repositories.count)
-            let newRepositories = Array(self.repositories[currentCount..<nextCount])
-            self.displayedRepositories.append(contentsOf: newRepositories)
-            
+        if isLoadingLast == true {
+            print("마지막 페이지까지 불러왔어요.")
             DispatchQueue.main.async {
-                self.repoTableView.reloadData()
-                self.isLoading = false
+                // repositories가 비어있을 때 알림 표시
+                let alert = UIAlertController(title: "알림", message: "저장소가 없습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
                 self.activityIndicator.stopAnimating()
             }
+            return
+        }
+        isLoading = true
+        page += 1
+        activityIndicator.startAnimating()
+        
+        fetchRepositories()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.repoTableView.reloadData()
+            self.isLoading = false
+            self.activityIndicator.stopAnimating()
         }
     }
     
-    func fetchRepositories(completion: @escaping ([Repository]) -> Void) {
-        GetRepoData.shared.getRepoData { [weak self] result in
+    func fetchRepositories() {
+        GetRepoData.shared.getRepoData(page: page) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let repositories):
-                self.repositories = repositories
-                completion(repositories)
+                if repositories.isEmpty == true {
+                    self.isLoadingLast = true
+                    return
+                }
+                self.repositories.append(contentsOf: repositories)
+                print("Repositories: \(self.repositories.count)")
+                
+                DispatchQueue.main.async {
+                    self.repoTableView.reloadData()
+                }
+                
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
-                completion([])
             }
         }
     }
 }
-extension RepoViewController: UITableViewDelegate,UITableViewDataSource {
+extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return displayedRepositories.count
+        if searchController.isActive {
+            return displayedRepositories.count
+        } else {
+            return repositories.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as! RepoListTableCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath) as? RepoListTableCell else {
+            return UITableViewCell()
+        }
         
-        let repository = displayedRepositories[indexPath.row]
+        let repository: Repository
+        if searchController.isActive {
+            repository = displayedRepositories[indexPath.row]
+        } else {
+            repository = repositories[indexPath.row]
+        }
+        
         cell.configureCell(repository: repository)
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repository = displayedRepositories[indexPath.row]
+        let repository: Repository
+        if searchController.isActive {
+            repository = displayedRepositories[indexPath.row]
+        } else {
+            repository = repositories[indexPath.row]
+        }
         
         guard let url = URL(string: repository.htmlURL) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let height = scrollView.frame.height
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         
-        if offsetY > contentHeight - height {
-            loadMoreData()
+        if indexPath.section == lastSectionIndex && indexPath.row == lastRowIndex {
+            // 마지막 셀에 도달한 경우
+            if !searchController.isActive {
+                loadMoreData()
+            }
         }
+    }
+}
+extension RepoViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        
+        displayedRepositories = repositories.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        
+        repoTableView.reloadData()
     }
 }

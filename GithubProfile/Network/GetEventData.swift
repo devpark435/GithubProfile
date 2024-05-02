@@ -9,6 +9,8 @@ import Alamofire
 
 class GetEventData{
     static let shared = GetEventData()
+    
+    // MARK: - Get Event Data
     func getEventData(completion: @escaping (Result<[EventModel], Error>) -> Void) {
         let url = "https://api.github.com/users/devpark435/events"
         

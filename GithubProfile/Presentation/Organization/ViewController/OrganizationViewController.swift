@@ -32,21 +32,28 @@ class OrganizationViewController: UIViewController{
         organizationTableView.dataSource = self
     }
 }
+
 extension OrganizationViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orgs.count
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OrganizationTableCell", for: indexPath) as! OrganizationTableCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "OrganizationTableCell", for: indexPath) as? OrganizationTableCell else {
+            return UITableViewCell()
+        }
+        
         
         let org = orgs[indexPath.row]
         cell.configure(org: org)
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let org = orgs[indexPath.row]
         

@@ -10,6 +10,7 @@ import Alamofire
 class GetOrganizationData {
     static let shared = GetOrganizationData()
     
+    // MARK: - Get Organization Data
     func getOrganizationData(completion: @escaping (Result<[OrganizationModel], Error>) -> Void) {
         let url = "https://api.github.com/users/devpark435/orgs"
         

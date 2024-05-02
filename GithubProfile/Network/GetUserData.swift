@@ -9,6 +9,8 @@ import Alamofire
 
 class GetUserData{
     static let shared = GetUserData()
+    
+    // MARK: - Get User Data
     func getUserData(completion: @escaping (Result<User, Error>) -> Void) {
         let url = "https://api.github.com/users/devpark435"
         
@@ -18,12 +20,13 @@ class GetUserData{
                 User.shared.update(with: user)
                 completion(.success(user))
             case .failure(let error):
-                print("Error: \(error)")
+                print("Get User Data Error: \(error)")
                 completion(.failure(error))
             }
         }
     }
     
+    // MARK: - Get Readme.md
     func getUserMd(completion: @escaping (Result<ReadmeResponse, Error>) -> Void) {
         let url = "https://api.github.com/repos/devpark435/devpark435/readme"
         
@@ -32,7 +35,7 @@ class GetUserData{
             case .success(let readmeResponse):
                 completion(.success(readmeResponse))
             case .failure(let error):
-                print("Error: \(error)")
+                print("Get User READ.md Error: \(error)")
                 completion(.failure(error))
             }
         }

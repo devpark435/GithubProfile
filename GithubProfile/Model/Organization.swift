@@ -5,7 +5,7 @@
 //  Created by 박현렬 on 4/10/24.
 //
 
-struct OrganizationModel: Codable {
+struct OrganizationModel: Decodable {
     let login: String
     let id: Int
     let nodeID: String

@@ -5,8 +5,6 @@
 //  Created by 박현렬 on 4/9/24.
 //
 
-import Foundation
-
 class User: Codable {
     static let shared = User()
     

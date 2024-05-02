@@ -5,8 +5,7 @@
 //  Created by 박현렬 on 4/10/24.
 //
 
-import Foundation
-struct Repository: Codable {
+struct Repository: Decodable {
     let id: Int
     let name: String
     let fullName: String
@@ -14,7 +13,6 @@ struct Repository: Codable {
     let description: String?
     let language: String?
     let htmlURL: String
-    // 필요한 다른 프로퍼티 추가
     
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -26,7 +24,7 @@ struct Repository: Codable {
     }
 }
 
-struct Owner: Codable {
+struct Owner: Decodable {
     let login: String
     let avatarURL: String
     
