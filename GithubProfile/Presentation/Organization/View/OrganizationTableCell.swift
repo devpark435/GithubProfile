@@ -18,11 +18,13 @@ class OrganizationTableCell: UITableViewCell {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 5
     }
+    
     let orgNameLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         $0.textColor = .black
     }
+    
     let orgDescriptionLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 15)
@@ -34,6 +36,7 @@ class OrganizationTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupViews()
+        
     }
     
     // MARK: - SetupViews & Constraints
